@@ -69,9 +69,8 @@ function implicit_euler(lmd,h,f,sol,init,a,b)
         y_old = prev + h*f(lmd,prev,t+h);
         y_new = prev + h*f(lmd,y_old,t+h);
         while abs(y_new - y_old) > tol
-            save = y_new;
+            y_old = y_new;
             y_new = prev + h*f(lmd,y_old,t+h);
-            y_old = save;
         end
         y(i) = y_new;
         prev = y(i);
@@ -108,9 +107,8 @@ function trapezoidal(lmd,h,f,sol,init,a,b)
         y_old = prev + (h/2)*(f(lmd,prev,t)+f(lmd,prev,t+h));
         y_new = prev + (h/2)*(f(lmd,prev,t) + f(lmd,y_old,t+h));
         while abs(y_new - y_old) > tol
-            save = y_new;
+            y_old = y_new;
             y_new = prev + (h/2)*(f(lmd,prev,t) + f(lmd,y_old,t+h));
-            y_old = save;
         end
         y(i) = y_new;
         prev = y(i);
